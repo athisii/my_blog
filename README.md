@@ -1,1 +1,1 @@
-Simple Django blog.
+A Simple Django blog.
