@@ -18,6 +18,9 @@ urllib3 = "==1.25.7"
 Django = "==3.0.2"
 pylint = "*"
 autopep8 = "*"
+django-cleanup = "*"
+Pillow = "*"
+psycopg2-binary = "*"
 
 [requires]
 python_version = "3.7"
