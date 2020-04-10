@@ -1,1 +1,1 @@
-A Simple Django blog.
+A Simple Blogging WebApp.
