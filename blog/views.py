@@ -25,6 +25,7 @@ class PostListView(ListView):  # List all post
 
     paginate_by = 5
 
+
 class UserPostListView(LoginRequiredMixin, ListView):  # List all post
     model = Post
     template_name = 'blog/user_posts.html'
@@ -36,7 +37,7 @@ class UserPostListView(LoginRequiredMixin, ListView):  # List all post
         return Post.objects.filter(author=user).order_by('-date_posted')
 
 
-class PostDetaiView(DetailView):
+class PostDetaiView(LoginRequiredMixin, DetailView):
     model = Post
 
 
