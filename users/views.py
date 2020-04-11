@@ -50,7 +50,7 @@ def profile(request):
 
 
 def contact(request):
-    form_class = ContactForm
+    form_class = ContactForm()
     if request.method == 'POST':
         form = form_class(data=request.POST)
 
