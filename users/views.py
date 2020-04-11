@@ -76,7 +76,7 @@ def contact(request):
             )
 
             email.send()
-            messages.success(request, f'Your contact form has been submitted!')
+            messages.success(request, f'Your contact form has been sent!')
             return redirect('contact')
 
     return render(request, 'users/contact.html', {'form': form_class})

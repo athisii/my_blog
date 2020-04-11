@@ -1,3 +1,4 @@
+{% load crispy_forms_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -26,8 +27,12 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
-            <a class="nav-item nav-link" href="{% url 'blog-home' %}">Home</a>
-            <a class="nav-item nav-link" href="{% url 'blog-about' %} ">About</a>
+            <form class="form-inline" method='GET' action="{% url 'search-post' %}">
+              {% csrf_token %}
+              <input class="form-control mr-sm-1" type="text" name='q' value='{{ request.GET.q }}' placeholder="Search">
+              <button class="btn btn-success" type="submit">Search</button>
+            </form>
+            </form>
           </div>
           <!-- Navbar Right Side -->
           <div class="navbar-nav">
@@ -38,6 +43,7 @@
             {% else %}
             <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
             <a class="nav-item nav-link" href="{% url 'register' %}">Register</a>
+            <a class="nav-item nav-link" href="{% url 'blog-about' %} ">About</a>
             {% endif %}
           </div>
         </div>
@@ -49,7 +55,7 @@
       <div class="col-md-8">
         {% if messages %}
         {% for message in messages %}
-        <div class='alert alert-{{ message.tags }}'>
+        <div class=' alert alert-{{ message.tags }}'>
           {{ message }}
         </div>
         {% endfor %}

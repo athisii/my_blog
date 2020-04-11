@@ -4,12 +4,14 @@ from .views import (PostListView,
                     PostCreateView,
                     PostUpdateView,
                     PostDeleteView,
-                    UserPostListView
+                    UserPostListView,
+                    SearchPostListView
                     )
 from .import views
 
 urlpatterns = [
     path('', PostListView.as_view(), name='blog-home'),
+    path('$', SearchPostListView.as_view(), name='search-post'),
     path('user/<str:username>/', UserPostListView.as_view(), name='user-posts'),
     path('post/<int:pk>/', PostDetaiView.as_view(), name='post-detail'),
     path('post/new/', PostCreateView.as_view(), name='post-create'),

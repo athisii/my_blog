@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
+from django.db.models import Q
 from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (ListView,
@@ -35,6 +36,22 @@ class UserPostListView(LoginRequiredMixin, ListView):  # List all post
     def get_queryset(self):
         user = get_object_or_404(User, username=self.kwargs.get('username'))
         return Post.objects.filter(author=user).order_by('-date_posted')
+
+
+class SearchPostListView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = 'blog/search_post.html'
+    context_object_name = 'posts'
+    paginate_by = 5
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        if query:
+            object_list = self.model.objects.filter(
+                Q(title__icontains=query) | Q(content__icontains=query))
+        else:
+            object_list = self.model.objects.none()
+        return object_list
 
 
 class PostDetaiView(LoginRequiredMixin, DetailView):
